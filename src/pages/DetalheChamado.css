@@ -1,0 +1,11 @@
+.botao-voltar {  
+    display: inline-block;
+    padding: 10px 16px;
+    background-color: #2563eb;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}

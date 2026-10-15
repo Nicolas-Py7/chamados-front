@@ -1,0 +1,144 @@
+
+.card-chamado {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+    padding: 24px;
+    background-color: #111827;
+    border: 1px solid #273449;
+    border-radius: 14px;
+    color: #f9fafb;
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.card-chamado:hover {
+    transform: translateY(-3px);
+    border-color: #3b82f6;
+}
+
+.card-chamado__topo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.card-chamado__titulo {
+    margin: 0;
+    font-size: 20px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.card-chamado__descricao {
+    margin: 0;
+    color: #9ca3af;
+    font-size: 14px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.card-chamado__tipo,
+.card-chamado__local {
+    margin: 0;
+    color: #d1d5db;
+    font-size: 13px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.card-chamado__rodape {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid #273449;
+}
+
+.card-chamado__prioridade {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #d1d5db;
+    font-size: 13px;
+}
+
+.prioridade {
+    width: 9px;
+    height: 9px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background-color: #9ca3af;
+}
+
+.prioridade--baixa {
+    background-color: #22c55e;
+}
+
+.prioridade--media,
+.prioridade--média {
+    background-color: #eab308;
+}
+
+.prioridade--alta {
+    background-color: #f97316;
+}
+
+.prioridade--critica,
+.prioridade--crítica {
+    background-color: #ef4444;
+}
+
+.card-chamado__link {
+    color: #60a5fa;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.card-chamado__link:hover {
+    color: #93c5fd;
+}
+
+.status {
+    padding: 6px 10px;
+    border-radius: 999px;
+    background-color: #374151;
+    color: #e5e7eb;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.status--aberto {
+    background-color: #1e3a8a;
+    color: #bfdbfe;
+}
+
+.status--em-andamento {
+    background-color: #713f12;
+    color: #fde68a;
+}
+
+.status--resolvido {
+    background-color: #14532d;
+    color: #bbf7d0;
+}
+
+@media (max-width: 480px) {
+    .card-chamado {
+        padding: 18px;
+    }
+
+    .card-chamado__rodape {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
