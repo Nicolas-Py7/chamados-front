@@ -51,6 +51,8 @@
     overflow-wrap: anywhere;
 }
 
+/* ---------- Informações (grade de campos) ---------- */
+
 .card-detalhado__informacoes {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -59,11 +61,11 @@
 }
 
 .card-detalhado__campo {
+    min-width: 0;
     padding: 18px;
     background-color: #1f2937;
     border: 1px solid #374151;
     border-radius: 10px;
-    min-width: 0;
 }
 
 .card-detalhado__campo span {
@@ -79,21 +81,7 @@
     overflow-wrap: anywhere;
 }
 
-@media (max-width: 600px) {
-    .card-detalhado {
-        padding: 20px;
-        gap: 20px;
-    }
-
-    .card-detalhado__titulo {
-        font-size: 23px;
-    }
-
-    .card-detalhado__informacoes {
-        grid-template-columns: minmax(0, 1fr);
-    }
-}
-
+/* ---------- Ações: container ---------- */
 
 .card-detalhado__acoes {
     display: flex;
@@ -103,14 +91,17 @@
     margin-top: 8px;
 }
 
-.card-detalhado__acoes button {
+/* ---------- Ações: estilo base dos botões e do link Editar ---------- */
+
+.card-detalhado__acoes button,
+.botao-editar {
     padding: 12px 20px;
     border: 1px solid transparent;
     border-radius: 10px;
+    color: #ffffff;
+    font-family: inherit;
     font-size: 14px;
     font-weight: 600;
-    font-family: inherit;
-    color: #ffffff;
     cursor: pointer;
     transition:
         background-color 0.2s ease,
@@ -118,15 +109,18 @@
         box-shadow 0.2s ease;
 }
 
-.card-detalhado__acoes button:hover {
+.card-detalhado__acoes button:hover,
+.botao-editar:hover {
     transform: translateY(-2px);
 }
 
-.card-detalhado__acoes button:focus-visible {
+.card-detalhado__acoes button:focus-visible,
+.botao-editar:focus-visible {
     outline: 2px solid #93c5fd;
     outline-offset: 3px;
 }
 
+/* Iniciar atendimento / Resolver chamado (azul) */
 .card-detalhado__acoes > button {
     background-color: #2563eb;
 }
@@ -136,46 +130,7 @@
     box-shadow: 0 4px 14px #2563eb33;
 }
 
-.card-detalhado__acoes form {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-    width: 100%;
-}
-
-.card-detalhado__acoes textarea {
-    box-sizing: border-box;
-    width: 100%;
-    min-height: 120px;
-    padding: 14px;
-    border: 1px solid #374151;
-    border-radius: 10px;
-    background-color: #1f2937;
-    color: #f9fafb;
-    font: inherit;
-    font-size: 14px;
-    resize: vertical;
-}
-
-.card-detalhado__acoes textarea::placeholder {
-    color: #9ca3af;
-}
-
-.card-detalhado__acoes textarea:focus {
-    outline: 2px solid #3b82f6;
-    outline-offset: 2px;
-}
-
-.card-detalhado__acoes form button {
-    background-color: #15803d;
-}
-
-.card-detalhado__acoes form button:hover {
-    background-color: #166534;
-    box-shadow: 0 4px 14px #16a34a33;
-}
-
+/* Excluir chamado (vermelho, sempre o último botão) */
 .card-detalhado__acoes > button:last-child {
     background-color: #b91c1c;
 }
@@ -185,53 +140,18 @@
     box-shadow: 0 4px 14px #dc262633;
 }
 
-@media (max-width: 600px) {
-    .card-detalhado__acoes button {
-        width: 100%;
-    }
-}
-
-.card-detalhado__acoes form {
-    align-items: stretch;
-}
-
-.card-detalhado__acoes form button:last-child {
-    align-self: flex-start;
+/* Editar (link) */
+.botao-editar {
+    display: inline-block;
     background-color: #374151;
+    text-decoration: none;
 }
 
-.card-detalhado__acoes form button:last-child:hover {
+.botao-editar:hover {
     background-color: #4b5563;
 }
 
-.card-detalhado__botoes-resolucao {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-}
-
-.card-detalhado__botoes-resolucao button {
-    width: auto;
-}
-
-.card-detalhado__botoes-resolucao button:last-child {
-    background-color: #374151;
-}
-
-.card-detalhado__botoes-resolucao button:last-child:hover {
-    background-color: #4b5563;
-}
-
-@media (max-width: 600px) {
-    .card-detalhado__botoes-resolucao {
-        width: 100%;
-    }
-
-    .card-detalhado__botoes-resolucao button {
-        flex: 1;
-    }
-}
+/* ---------- Ações: formulários (responsável / solução) ---------- */
 
 .card-detalhado__acoes form {
     display: flex;
@@ -249,8 +169,8 @@
 
 .card-detalhado__acoes form input,
 .card-detalhado__acoes form textarea {
-    width: 100%;
     box-sizing: border-box;
+    width: 100%;
     padding: 12px 14px;
     background-color: #111827;
     color: #f8fafc;
@@ -259,6 +179,11 @@
     font: inherit;
     outline: none;
     transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.card-detalhado__acoes form textarea {
+    min-height: 120px;
+    resize: vertical;
 }
 
 .card-detalhado__acoes form input::placeholder,
@@ -276,4 +201,53 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+}
+
+/* Confirmar (verde) */
+.card-detalhado__acoes form button {
+    background-color: #15803d;
+}
+
+.card-detalhado__acoes form button:hover {
+    background-color: #166534;
+    box-shadow: 0 4px 14px #16a34a33;
+}
+
+/* Cancelar (cinza, último botão do form) */
+.card-detalhado__acoes form button:last-child {
+    background-color: #374151;
+}
+
+.card-detalhado__acoes form button:last-child:hover {
+    background-color: #4b5563;
+    box-shadow: none;
+}
+
+/* ---------- Responsivo ---------- */
+
+@media (max-width: 600px) {
+    .card-detalhado {
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .card-detalhado__titulo {
+        font-size: 23px;
+    }
+
+    .card-detalhado__informacoes {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .card-detalhado__acoes {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .card-detalhado__acoes button,
+    .botao-editar {
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
 }

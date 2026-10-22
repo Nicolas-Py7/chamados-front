@@ -1,5 +1,6 @@
 import "./CardDetalhado.css";
 import { useState } from "react";
+import { Link } from "react-router-dom"
 
 function CardDetalhado({ chamado, onIniciar, onResolver, onExcluir }) {
     const [solucao, setSolucao] = useState("");
@@ -48,6 +49,26 @@ function CardDetalhado({ chamado, onIniciar, onResolver, onExcluir }) {
                     <span>Responsável</span>
                     <p>{chamado.responsavel || "Não atribuído"}</p>
                 </div>
+
+                <div className="card-detalhado__campo">
+                    <span>Aberto em</span>
+                    <p>{chamado.data_abertura}</p>
+                </div>
+
+                {chamado.status === "resolvido" && (
+                    <>
+                        <div className="card-detalhado__campo">
+                            <span>Solução</span>
+                            <p>{chamado.solucao}</p>
+                        </div>
+
+                        <div className="card-detalhado__campo">
+                            <span>Resolvido em</span>
+                            <p>{chamado.data_resolucao}</p>
+                        </div>
+                    </>
+                )}
+
             </div>
 
             <div className="card-detalhado__acoes">
@@ -64,7 +85,7 @@ function CardDetalhado({ chamado, onIniciar, onResolver, onExcluir }) {
                             <form
                                 onSubmit={(e) => {
                                     e.preventDefault();
-                                    onIniciar(responsavel);
+                                    onIniciar(responsavel.trim());
                                 }}
                             >
                                 <label htmlFor="responsavel">
@@ -111,7 +132,7 @@ function CardDetalhado({ chamado, onIniciar, onResolver, onExcluir }) {
                     <form
                         onSubmit={(e) => {
                         e.preventDefault();
-                        onResolver(solucao);
+                        onResolver(solucao.trim());
                         }}
                     >
                         <textarea
@@ -134,6 +155,10 @@ function CardDetalhado({ chamado, onIniciar, onResolver, onExcluir }) {
                     </form>
                     )}
                 </>
+                )}
+
+                {chamado.status !== "resolvido" && (
+                    <Link className="botao-editar" to={`/editar/${chamado.id}`}>Editar</Link>
                 )}
 
                 <button type="button" onClick={onExcluir}>

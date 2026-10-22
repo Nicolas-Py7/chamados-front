@@ -4,6 +4,7 @@ import api from "../services/api";
 import Cabecalho from "../components/Cabecalho";
 import Formulario from "../components/Formulario";
 import "./FormularioChamado.css";
+import mensagemErro from "../services/erros";
 
 function FormularioChamado() {
     const navigate = useNavigate();
@@ -37,11 +38,18 @@ function FormularioChamado() {
                     api.get("/locais"),
                     api.get("/prioridades"),
                 ]);
+                
+                setUsuario(respostaUsuario.data);
 
                 if (id) {
                     const respostaChamado = await api.get(`/chamados/${id}`);
 
                     const chamado = respostaChamado.data;
+
+                    if (chamado.status === "resolvido") {
+                        setErro("Chamados resolvidos não podem ser editados.");
+                        return;
+                    }
 
                     setTitulo(chamado.titulo);
                     setDescricao(chamado.descricao);
@@ -51,13 +59,12 @@ function FormularioChamado() {
                     setDataAbertura(chamado.data_abertura);
                 }
 
-                setUsuario(respostaUsuario.data);
                 setTipos(respostaTipos.data);
                 setLocais(respostaLocais.data);
                 setPrioridades(respostaPrioridades.data);
             } catch (erro) {
                 console.error(erro);
-                setErro("Não foi possível carregar os dados do formulário.");
+                setErro(mensagemErro(erro, "Não foi possível carregar os dados do formulário."));
             } finally {
                 setCarregando(false);
             }
@@ -72,8 +79,8 @@ function FormularioChamado() {
 
         try {
             const novoChamado = {
-                titulo: titulo,
-                descricao: descricao,
+                titulo: titulo.trim(),
+                descricao: descricao.trim(),
                 tipo: tipo,
                 local: local,
                 prioridade: prioridade,
@@ -90,13 +97,7 @@ function FormularioChamado() {
             navigate(`/chamado/${id || resposta.data.id}`);
         } catch (erro) {
             console.error("Erro ao salvar chamado:", erro.response?.data ?? erro.message);
-
-            const mensagem =
-                erro.response?.data?.detail ??
-                erro.response?.data?.message ??
-                erro.message;
-
-            setErroSalvamento(`Não foi possível salvar: ${mensagem}`);
+            setErroSalvamento(mensagemErro(erro, "Não foi possível salvar o chamado."));
         }
     } 
 

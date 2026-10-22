@@ -1,5 +1,6 @@
 import "./Formulario.css"
-
+import { Link } from "react-router-dom";
+ 
 function Formulario({ 
     id,
     titulo,
@@ -27,7 +28,7 @@ function Formulario({
                 <input type="text" placeholder="Título" value={titulo} onChange={(e) => setTitulo(e.target.value)} required />
 
                 <select value={tipo} onChange={(e) => setTipo(e.target.value)} required>
-                    <option value="">Selecione um tipo.</option>
+                    <option value="">Selecione um tipo</option>
                     {tipos.map((item) => (
                         <option key={item} value={item}>
                             {item}
@@ -36,7 +37,7 @@ function Formulario({
                 </select>
 
                 <select value={local} onChange={(e) => setLocal(e.target.value)} required>
-                    <option value="">Selecione um local.</option>
+                    <option value="">Selecione um local</option>
                     {locais.map((item) => (
                         <option key={item} value={item}>
                             {item}
@@ -45,7 +46,7 @@ function Formulario({
                 </select>
 
                 <select value={prioridade} onChange={(e) => setPrioridade(e.target.value)} required>
-                    <option value="">Selecione a prioridade.</option>
+                    <option value="">Selecione a prioridade</option>
                     {prioridades.map((item) => (
                         <option key={item} value={item}>
                             {item}
@@ -60,6 +61,7 @@ function Formulario({
                 <button type="submit">
                     {id ? "Salvar alterações" : "Abrir chamado"}
                 </button>
+                <Link to={id ? `/chamado/${id}` : "/"}>Cancelar</Link>
 
             </form>
         </div>

@@ -1,16 +1,30 @@
 section {
-    margin: 3%
+    margin: 3%;
 }
 
-.lista-chamados {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 22px;
-
-  width: 100%;
-  margin: 28px auto;
-  align-items: stretch;
+.div-titulo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
+
+.botao-novo-chamado {
+    display: inline-block;
+    padding: 10px 16px;
+    background-color: #2563eb;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.botao-novo-chamado:hover {
+    background-color: #1d4ed8;
+}
+
+/* ---------- Filtros ---------- */
 
 .filtros-chamados {
     display: flex;
@@ -40,26 +54,24 @@ section {
     cursor: pointer;
 }
 
-.botao-novo-chamado {
-    display: inline-block;
-    padding: 10px 16px;
-    background-color: #2563eb;
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: 8px;
-    transition: background-color 0.2s ease;
+/* ---------- Lista de cards ---------- */
+
+.lista-chamados {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+    align-items: stretch;
+    width: 100%;
+    margin: 28px auto;
 }
 
-.botao-novo-chamado:hover {
-    background-color: #1d4ed8;
-}
+/* ---------- Responsivo ---------- */
 
-.div-titulo {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+@media (max-width: 700px) {
+    .lista-chamados {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+    }
 }
 
 @media (max-width: 600px) {
@@ -72,11 +84,4 @@ section {
         width: 100%;
         box-sizing: border-box;
     }
-}
-
-@media (max-width: 700px) {
-  .lista-chamados {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 16px;
-  }
 }

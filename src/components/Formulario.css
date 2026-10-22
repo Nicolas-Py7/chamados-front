@@ -1,3 +1,10 @@
+.formulario-subtitulo {
+    margin: 0 0 22px 7.5%;
+    color: #e2e8f0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
 .formulario-campos {
     display: flex;
     flex-direction: column;
@@ -7,22 +14,20 @@
     margin: 0 auto;
 }
 
+/* ---------- Campos ---------- */
+
 .formulario-campos input,
 .formulario-campos select,
 .formulario-campos textarea {
     box-sizing: border-box;
     width: 100%;
     padding: 14px 16px;
-
     color: #f1f5f9;
     background-color: #151e2d;
-
     border: 1px solid #303d50;
     border-radius: 10px;
-
     font: inherit;
     font-size: 15px;
-
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
@@ -48,21 +53,19 @@
     resize: vertical;
 }
 
+/* ---------- Botão de envio ---------- */
+
 .formulario-campos button {
     box-sizing: border-box;
     width: 100%;
     padding: 14px 18px;
-
     color: #ffffff;
     background-color: #2563eb;
-
     border: 1px solid #3b82f6;
     border-radius: 10px;
-
     font: inherit;
     font-size: 15px;
     font-weight: 600;
-
     cursor: pointer;
     transition: background-color 0.2s, transform 0.2s;
 }
@@ -75,11 +78,14 @@
     transform: scale(0.99);
 }
 
-.formulario-subtitulo {
-    margin: 0 0 22px;
-    color: #e2e8f0;
-    font-size: 20px;
-    font-weight: 600;
-    text-align: left;
-    margin-left: 7.5%;
+.formulario-campos a {
+    padding: 8px;
+    color: #93c5fd;
+    text-align: center;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.formulario-campos a:hover {
+    color: #bfdbfe;
 }

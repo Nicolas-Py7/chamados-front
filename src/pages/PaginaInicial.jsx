@@ -4,6 +4,7 @@
     import CardChamado from "../components/CardChamado.jsx"
     import "./PaginaInicial.css"
     import Cabecalho from "../components/Cabecalho.jsx";
+    import mensagemErro from "../services/erros.js";
 
     function PaginaInicial() {
         const [chamados, setChamados] = useState([]);
@@ -47,8 +48,8 @@
                     );
                 } catch (erro) {
                     console.error(erro);
-                    setErro("Não foi possível carregar os chamados.");
-                } finally {
+                    setErro(mensagemErro(erro, "Não foi possível carregar os chamados."));
+                } finally { 
                     setCarregando(false);
                 }
             }

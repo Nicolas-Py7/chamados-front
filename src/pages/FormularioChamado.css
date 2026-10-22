@@ -4,18 +4,7 @@
 }
 
 .formulario-chamado .botao-voltar {
-    display: inline-block;
     margin-bottom: 28px;
-
-    color: #93c5fd;
-    text-decoration: none;
-
-    transition: color 0.2s;
-}
-
-.formulario-chamado .botao-voltar:hover {
-    color: #bfdbfe;
-    text-decoration: none;
 }
 
 .formulario-intro {

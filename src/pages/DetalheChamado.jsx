@@ -4,6 +4,7 @@ import api from "../services/api";
 import Cabecalho from "../components/Cabecalho";
 import CardDetalhado from "../components/CardDetalhado";
 import "./DetalheChamado.css"
+import mensagemErro from "../services/erros";
 
 function DetalheChamado() {
     const navigate = useNavigate();
@@ -12,6 +13,7 @@ function DetalheChamado() {
     const [carregando, setCarregando] = useState(true);
     const [erro, setErro] = useState("");
     const [usuario, setUsuario] = useState(null);
+    const [erroAcao, setErroAcao] = useState("");
 
     useEffect(() => {
         async function carregarChamado() {
@@ -26,7 +28,7 @@ function DetalheChamado() {
 
             } catch(erro) {
                 console.error(erro);
-                setErro("Não foi possível carregar este chamado.");
+                setErro(mensagemErro(erro, "Não foi possível carregar este chamado."));
             } finally {
                 setCarregando(false);
             }
@@ -36,7 +38,9 @@ function DetalheChamado() {
     }, [id])
 
     async function iniciarChamado(responsavel) {
+        setErroAcao("");
         try {
+
             await api.patch(`/chamados/${id}/iniciar`, {
                 responsavel: responsavel,
             });
@@ -45,13 +49,15 @@ function DetalheChamado() {
             setChamado(resposta.data);
         } catch (erro) {
             console.error("Erro ao iniciar o chamado:", erro);
-            setErro("Não foi possível iniciar o atendimento.")
+            setErroAcao(mensagemErro(erro, "Não foi possível iniciar o atendimento."));
         }
         
     }
 
     async function resolverChamado(solucao) {
+        setErroAcao("");
         try {
+
             await api.patch(`/chamados/${id}/resolver`, {
                 solucao: solucao,
             });
@@ -60,7 +66,7 @@ function DetalheChamado() {
             setChamado(resposta.data);
         } catch (erro) {
             console.error("Erro ao resolver o chamado:", erro);
-            setErro("Não foi possível resolver o chamado.");
+            setErroAcao(mensagemErro(erro, "Não foi possível resolver o chamado."));
         }
     }
 
@@ -71,12 +77,14 @@ function DetalheChamado() {
 
         if (!confirmar) return;
 
+        setErroAcao("");
         try {
+
             await api.delete(`/chamados/${id}`);
             navigate("/");
         } catch (erro) {
             console.error("Erro ao excluir o chamado:", erro);
-            setErro("Não foi possível excluir o chamado.");
+            setErroAcao(mensagemErro(erro, "Não foi possível excluir o chamado."));
         }
     }
 
@@ -85,7 +93,15 @@ function DetalheChamado() {
     }
 
     if (erro) {
-        return <p>{erro}</p>
+        return (
+            <div>
+                <Cabecalho nome={usuario?.nome ?? "usuário"} />
+                <section>
+                    <Link className="botao-voltar" to="/">← Voltar aos chamados</Link>
+                    <p role="alert">{erro}</p>
+                </section>
+            </div>
+        );
     }
 
     return (
@@ -94,6 +110,8 @@ function DetalheChamado() {
 
             <section>
                 <Link className="botao-voltar" to="/">← Voltar aos chamados</Link>
+
+                {erroAcao && <p role="alert">{erroAcao}</p>}
 
                 <CardDetalhado chamado={chamado} onIniciar={iniciarChamado} onResolver={resolverChamado} onExcluir={excluirChamado} />
             </section>
